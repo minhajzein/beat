@@ -3,7 +3,7 @@ import { baseUri } from "../config/baseUri";
 
 const baseQuery = fetchBaseQuery({
     baseUrl: baseUri,
-    credentials: 'include',
+    credentials: 'same-origin',
     timeout: 15000,
     prepareHeaders: (headers, { getState }) => {
         headers.set('Accept', 'application/json');

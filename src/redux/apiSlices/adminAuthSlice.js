@@ -48,9 +48,6 @@ export const {
     useLoginMutation,
     useSendLougoutMutation,
     useRefreshMutation,
-    useGoogleLoginMutation,
-    useGoogleSignupMutation,
-    useSignupMutation,
     usePrefetch
 } = authApiSlice
 
