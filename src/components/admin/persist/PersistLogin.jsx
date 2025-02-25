@@ -31,7 +31,6 @@ const PersistLoginComp = () => {
 							theme: 'colored',
 						})
 					} else {
-						dispatch(setUserdata(data?.user))
 						dispatch(setCredentials(data))
 						setTruePersist(true)
 					}
