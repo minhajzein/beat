@@ -10,7 +10,7 @@ import { setCredentials } from '../../../redux/slices/authSlice'
 
 function Login() {
 	const [password, setPassword] = useState(true)
-	const [adminLogin, { isLoading, isError }] = useLoginMutation()
+	const [adminLogin, { isLoading }] = useLoginMutation()
 
 	const [adminPersist, setAdminPersist] = usePersist()
 	const handleToggle = () => setAdminPersist(prev => !prev)
@@ -33,12 +33,11 @@ function Login() {
 		onSubmit: async values => {
 			try {
 				const { data } = await adminLogin(values)
-
 				if (data?.success) {
 					dispatch(setCredentials(data.adminToken))
 					navigate('/admin')
 				} else {
-					toast.error(data?.message, {
+					toast.error('Invalid Credentials', {
 						position: 'top-center',
 						theme: 'colored',
 					})

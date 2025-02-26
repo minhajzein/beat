@@ -3,6 +3,11 @@ import Login from '../components/admin/login/Login'
 import Public from '../components/admin/admin-public/Public'
 import RequireAuth from '../components/admin/require-auth/RequireAuth'
 import Home from '../components/admin/home/Home'
+import Layout from '../components/admin/layout/Layout'
+import Students from '../components/admin/students/Students'
+import DataManage from '../components/admin/manage-data/DataManage'
+import Questions from '../components/admin/questions/Questions'
+import QuestionForm from '../components/admin/questions/QuestionForm'
 
 function AdminRoutes() {
 	return (
@@ -12,7 +17,13 @@ function AdminRoutes() {
 					<Route path='login' element={<Login />} />
 				</Route>
 				<Route element={<RequireAuth />}>
-					<Route path='/' element={<Home/>} />
+					<Route path='/' element={<Layout />}>
+						<Route path='/' element={<Home />} />
+						<Route path='students' element={<Students />} />
+						<Route path='manage-data' element={<DataManage />} />
+						<Route path='questions' element={<Questions />} />
+						<Route path='add-question' element={<QuestionForm />} />
+					</Route>
 				</Route>
 			</Route>
 		</Routes>
