@@ -13,6 +13,7 @@ import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { changeStatus } from '../../../redux/slices/statusSlice'
+import { storeStudentId } from '../../../redux/slices/studentSlice'
 
 //================================================================================================
 
@@ -52,6 +53,7 @@ function Register() {
 				if (data?.success) {
 					toast.success('Registered successfully!')
 					dispatch(changeStatus('registered'))
+					dispatch(storeStudentId(data.studentId))
 					navigate('/take-test')
 				} else {
 					toast.error('Registration failed! Please try again')

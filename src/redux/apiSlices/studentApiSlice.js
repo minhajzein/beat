@@ -23,6 +23,25 @@ const studentApiSlice = apiSlice.injectEndpoints({
             }),
             providesTags: ['Test']
         }),
+
+        createResult: builder.mutation({
+            query: (credentials) => ({
+                url: '/create-result',
+                method: 'POST',
+                body: { ...credentials }
+            })
+        }),
+
+        getResult: builder.query({
+            query: (studentId) => ({
+                url: `/result/${studentId}`,
+                validateStatus: (response, result) => {
+                    return response.status === 200 && !result.isError
+                },
+                keepUnusedDataFor: 5,
+            }),
+        }),
+
         getAllStudent: builder.query({
             query: () => ({
                 url: '/admin/students',
@@ -54,6 +73,8 @@ const studentApiSlice = apiSlice.injectEndpoints({
 
 export const {
     useRegisterMutation,
+    useCreateResultMutation,
+    useGetResultQuery,
     useGetAllStudentQuery,
     useGetTestQuestionsQuery,
     useLazyGetAllStudentQuery,
