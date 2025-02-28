@@ -54,7 +54,7 @@ function Login() {
 		<div className='h-screen w-full flex justify-center items-center lg:bg-none'>
 			<img
 				className='absolute -z-10 h-dvh w-full object-cover'
-				src='/src/assets/images/admin-login.png'
+				src='/images/admin-login.png'
 				alt=''
 			/>
 			<div className='bg-theme-purple text-white w-[90%] md:w-[50%] h-auto rounded-3xl md:grid md:grid-cols-1 lg:grid-cols-2 p-3 gap-4'>
@@ -138,7 +138,7 @@ function Login() {
 				<div className='bg-cover bg-center rounded-2xl hidden lg:block'>
 					<img
 						className='w-full h-full object-cover rounded-xl'
-						src='/src/assets/images/login-side.png'
+						src='/images/login-side.png'
 						alt=''
 					/>
 				</div>
