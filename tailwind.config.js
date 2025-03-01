@@ -8,7 +8,8 @@ export default {
     extend: {
       colors: {
         'theme-red': '#E20941',
-        'theme-purple': '#461BA6'
+        'theme-purple': '#461BA6',
+        'secondary-blue': '#60C0D9'
       },
       fontFamily: {
         merriweather: ['"Merriweather Sans"', 'serif']

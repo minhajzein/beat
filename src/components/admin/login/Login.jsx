@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import { useLoginMutation } from '../../../redux/apiSlices/adminAuthSlice'
 import usePersist from '../../../hooks/usePersist'
 import { setCredentials } from '../../../redux/slices/authSlice'
+import { Loading3QuartersOutlined } from '@ant-design/icons'
 
 function Login() {
 	const [password, setPassword] = useState(true)
@@ -48,9 +49,7 @@ function Login() {
 			}
 		},
 	})
-	return isLoading ? (
-		<div>Loading...</div>
-	) : (
+	return (
 		<div className='h-screen w-full flex justify-center items-center lg:bg-none'>
 			<img
 				className='absolute -z-10 h-dvh w-full object-cover'
@@ -128,8 +127,13 @@ function Login() {
 								<button
 									className='bg-theme-red p-2 shadow-md rounded-xl hover:scale-105 duration-300 w-full'
 									type='submit'
+									disabled={isLoading}
 								>
-									LOGIN
+									{isLoading ? (
+										<Loading3QuartersOutlined className='animate-spin' />
+									) : (
+										'LOGIN'
+									)}
 								</button>
 							</div>
 						</form>

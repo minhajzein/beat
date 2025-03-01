@@ -4,7 +4,7 @@ import {
 	useCreateResultMutation,
 	useGetTestQuestionsQuery,
 } from '../../../redux/apiSlices/studentApiSlice'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Radio } from 'antd'
 import { toast } from 'react-toastify'
 
@@ -60,7 +60,7 @@ function TestInterface() {
 		<Navigate to='/' state={{ from: location }} replace />
 	) : (
 		isSuccess && (
-			<div className='h-dvh w-full lg:p-24 bg-theme-purple'>
+			<div loading={isLoading} className='h-dvh w-full lg:p-24 bg-theme-purple'>
 				<div className='relative w-full h-full rounded-lg overflow-hidden shadow-lg shadow-black/50'>
 					<img
 						className='w-full h-full object-cover'
@@ -69,7 +69,7 @@ function TestInterface() {
 					/>
 					<div className='w-full flex flex-col gap-5 text-white p-5 absolute top-0 left-0 h-full bg-gradient-to-b from-black from-20% to-transparent'>
 						<h1 className='font-bold'>
-							{questionNumber + 1}.{test[questionNumber].question}
+							{questionNumber + 1}.{test[questionNumber]?.question}
 						</h1>
 						<div className='bg-white/50 backdrop-blur-sm p-5 rounded'>
 							<Radio.Group
@@ -77,12 +77,15 @@ function TestInterface() {
 								value={currentAnswer}
 								onChange={e => setCurrentAnswer(e.target.value)}
 							>
-								{test[questionNumber].answers.map(ans => (
+								{test[questionNumber]?.answers.map(ans => (
 									<Radio key={ans.id} value={ans.id}>
 										{ans.answer}
 									</Radio>
 								))}
 							</Radio.Group>
+							<label>
+								<input type='radio' name='gender' value='male' /> Male
+							</label>
 						</div>
 						<div className='flex justify-end'>
 							<button

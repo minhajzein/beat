@@ -1,11 +1,12 @@
 import {
 	Loading3QuartersOutlined,
 	MailOutlined,
+	PhoneOutlined,
 	RocketOutlined,
 	TrophyOutlined,
 	UserOutlined,
 } from '@ant-design/icons'
-import { Input } from 'antd'
+import { Input, Select } from 'antd'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useRegisterMutation } from '../../../redux/apiSlices/studentApiSlice'
@@ -14,6 +15,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { changeStatus } from '../../../redux/slices/statusSlice'
 import { storeStudentId } from '../../../redux/slices/studentSlice'
+import { keralaDistricts } from '../../../config/districts'
 
 //================================================================================================
 
@@ -24,19 +26,16 @@ function Register() {
 
 	const formik = useFormik({
 		initialValues: {
-			firstName: '',
-			surname: '',
-			email: '',
+			fullName: '',
+			district: '',
 			phone: '',
 			highestQualification: '',
 		},
 		validationSchema: Yup.object({
-			firstName: Yup.string('First Name should be letters'),
-			surname: Yup.string('Surname should be letters').required().min(3),
-			email: Yup.string()
-				.matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'email not valid')
-				.email('Invalid email address')
-				.required('email is required'),
+			fullName: Yup.string('First Name should be letters')
+				.min(3)
+				.required('Full Name is Required'),
+			district: Yup.string().required('Please select a District'),
 			phone: Yup.string()
 				.required('mobile number is required')
 				.matches(
@@ -65,111 +64,70 @@ function Register() {
 	})
 
 	return (
-		<div className='h-dvh w-full font-merriweather font-thin bg-theme-red lg:p-24'>
-			<div className='h-full w-full grid lg:grid-cols-2 lg:rounded-lg overflow-hidden shadow-lg shadow-black'>
-				<div className='hidden lg:block'>
+		<div className='h-dvh w-full font-merriweather font-thin lg:px-80 lg:py-16'>
+			<div className='h-full w-full lg:grid lg:grid-cols-2 lg:rounded-lg shadow-lg shadow-black'>
+				<img
+					className='object-cover h-2/4 w-full object-top lg:h-full'
+					src='/images/register-image.png'
+					alt=''
+				/>
+				<div className='bg-theme-purple lg:h-full h-2/4 lg:p-8 p-4 gap-4 text-white flex flex-col w-full relative justify-end'>
 					<img
-						className='w-full h-full object-cover'
-						src='/images/register-image.jpg'
-						alt=''
-					/>
-				</div>
-				<div className='bg-theme-purple text-white flex flex-col w-full relative justify-evenly'>
-					<img
-						className='absolute top-0 right-0 w-1/2 z-10 object-contain'
-						src='/images/theme-png.png'
-						alt=''
-					/>
-					<img
-						className='w-1/2 object-contain'
+						className='w-1/4 object-contain pb-2'
 						src='/images/beat_logo.png'
-						alt=''
+						alt='logo'
 					/>
-					<h1 className='text-center text-lg z-20'>Registration Form</h1>
+					<h1 className='text-lg z-20'>Registration Form</h1>
 					<form
 						onSubmit={formik.handleSubmit}
-						className='px-8 flex flex-col gap-2 z-20'
+						className='flex flex-col gap-2 z-20'
 					>
-						<div className='grid lg:grid-cols-2 gap-4 w-full'>
-							<div className='flex flex-col'>
-								<label className='text-xs' htmlFor='firstName'>
-									First Name(optional)
-								</label>
-								<Input
-									addonBefore={<UserOutlined />}
-									name='firstName'
-									onChange={formik.handleChange}
-									value={formik.values.firstName}
-									className='w-full p-1 rounded bg-white outline-none shadow shadow-black/50 text-sm text-black'
-									type='text'
-								/>
-								{formik.touched.firstName && formik.errors.firstName && (
-									<p className='text-xs text-red-500'>
-										{formik.errors.firstName}
-									</p>
-								)}
-							</div>
-							<div className='flex flex-col'>
-								<label className='text-xs' htmlFor='surname'>
-									Surname
-								</label>
-								<Input
-									addonBefore={<UserOutlined />}
-									name='surname'
-									onChange={formik.handleChange}
-									value={formik.values.surname}
-									className='w-full p-1 rounded bg-white outline-none shadow shadow-black/50 text-sm text-black'
-									type='text'
-								/>
-								{formik.touched.surname && formik.errors.surname && (
-									<p className='text-xs text-red-500'>
-										{formik.errors.surname}
-									</p>
-								)}
-							</div>
+						<div className='flex flex-col'>
+							<label className='text-xs' htmlFor='fullName'>
+								Full Name
+							</label>
+							<Input
+								addonBefore={<UserOutlined />}
+								name='fullName'
+								placeholder='Enter your full name'
+								onChange={formik.handleChange}
+								value={formik.values.fullName}
+								className='w-full p-1 rounded bg-white outline-none shadow shadow-black/50 text-black'
+								type='text'
+							/>
+							{formik.touched.fullName && formik.errors.fullName && (
+								<p className='text-xs text-red-500'>{formik.errors.fullName}</p>
+							)}
 						</div>
-						<div className='grid lg:grid-cols-2 gap-4 w-full'>
-							<div className='flex flex-col'>
-								<label className='text-xs' htmlFor='firstName'>
-									Email Address
-								</label>
-								<Input
-									addonBefore={<MailOutlined />}
-									name='email'
-									onChange={formik.handleChange}
-									value={formik.values.email}
-									className='w-full p-1 bg-white rounded outline-none shadow shadow-black/50 text-sm text-black'
-									type='text'
-								/>
-								{formik.touched.email && formik.errors.email && (
-									<p className='text-xs text-red-500'>{formik.errors.email}</p>
-								)}
-							</div>
-							<div className='flex flex-col'>
-								<label className='text-xs' htmlFor='surname'>
-									Phone Number
-								</label>
-								<Input
-									addonBefore='+91'
-									name='phone'
-									onChange={formik.handleChange}
-									value={formik.values.phone}
-									className='w-full p-1 bg-white rounded outline-none shadow shadow-black/50 text-sm text-black'
-									type='text'
-								/>
-								{formik.touched.phone && formik.errors.phone && (
-									<p className='text-xs text-red-500'>{formik.errors.phone}</p>
-								)}
-							</div>
+						<div className='flex flex-col'>
+							<label className='text-xs' htmlFor='surname'>
+								Phone Number
+							</label>
+							<Input
+								addonBefore={<PhoneOutlined />}
+								placeholder='Enter phone number'
+								prefix='+91'
+								name='phone'
+								onChange={formik.handleChange}
+								value={formik.values.phone}
+								className='w-full p-1 bg-white rounded outline-none shadow shadow-black/50 text-sm text-black'
+								type='text'
+							/>
+							{formik.touched.phone && formik.errors.phone && (
+								<p className='text-xs text-red-500'>{formik.errors.phone}</p>
+							)}
 						</div>
-						<div className='grid lg:grid-cols-2 gap-4 w-full'>
+
+						<div className='grid lg:grid-cols-2 gap-2 w-full'>
 							<div className='flex flex-col'>
-								<label className='text-xs' htmlFor='firstName'>
-									Highest Qualification
+								<label className='text-xs' htmlFor='highestQualification'>
+									Qualification
 								</label>
 								<Input
 									addonBefore={<TrophyOutlined />}
 									name='highestQualification'
+									id='highestQualification'
+									placeholder='Highest Education'
 									onChange={formik.handleChange}
 									value={formik.values.highestQualification}
 									className='w-full p-1 bg-white rounded outline-none shadow shadow-black/50 text-sm text-black'
@@ -182,29 +140,49 @@ function Register() {
 										</p>
 									)}
 							</div>
-							<div
-								className={`${
-									formik.errors.highestQualification &&
-									formik.touched.highestQualification
-										? 'flex flex-col justify-center'
-										: 'flex flex-col justify-end'
-								}`}
-							>
-								<button
-									type='submit'
-									disabled={isLoading}
-									className='bg-theme-red rounded py-2 shadow-lg shadow-black hover:scale-95 duration-300'
+							<div className='flex flex-col'>
+								<label className='text-xs' htmlFor='district'>
+									District
+								</label>
+								<Select
+									placeholder='Select a District'
+									className='w-full rounded shadow shadow-black/50 text-black'
+									onChange={value => formik.setFieldValue('district', value)}
+									showSearch
+									size='large'
+									optionFilterProp='children'
+									filterOption={(input, option) =>
+										option.props.children
+											.toLowerCase()
+											.indexOf(input.toLowerCase()) >= 0
+									}
 								>
-									{isLoading ? (
-										<Loading3QuartersOutlined className='animate-spin' />
-									) : (
-										<div>
-											Register <RocketOutlined className='animate-bounce' />
-										</div>
-									)}
-								</button>
+									{keralaDistricts?.map(district => (
+										<Select.Option value={district} key={district}>
+											{district}
+										</Select.Option>
+									))}
+								</Select>
+								{formik.touched.district && formik.errors.district && (
+									<p className='text-xs text-red-500'>
+										{formik.errors.district}
+									</p>
+								)}
 							</div>
 						</div>
+						<button
+							type='submit'
+							disabled={isLoading}
+							className='bg-secondary-blue w-full rounded py-2 shadow-lg shadow-black hover:scale-95 duration-300'
+						>
+							{isLoading ? (
+								<Loading3QuartersOutlined className='animate-spin' />
+							) : (
+								<div>
+									Register <RocketOutlined className='animate-bounce' />
+								</div>
+							)}
+						</button>
 					</form>
 				</div>
 			</div>
