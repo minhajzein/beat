@@ -67,11 +67,11 @@ function Register() {
 		<div className='h-dvh w-full font-merriweather font-thin lg:px-80 lg:py-16'>
 			<div className='h-full w-full lg:grid lg:grid-cols-2 lg:rounded-lg shadow-lg shadow-black'>
 				<img
-					className='object-cover h-2/4 w-full object-top lg:h-full'
+					className='object-cover h-1/3 w-full object-top lg:h-full'
 					src='/images/register-image.png'
 					alt=''
 				/>
-				<div className='bg-theme-purple lg:h-full h-2/4 lg:p-8 p-4 gap-4 text-white flex flex-col w-full relative justify-end'>
+				<div className='bg-theme-purple lg:h-full h-2/3 lg:p-8 p-4 gap-4 text-white flex flex-col w-full relative justify-end'>
 					<img
 						className='w-1/4 object-contain pb-2'
 						src='/images/beat_logo.png'
