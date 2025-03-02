@@ -62,7 +62,7 @@ function TestInterface() {
 		isSuccess && (
 			<div
 				loading={isLoading}
-				className='h-dvh flex w-full font-merriweather lg:py-10 lg:px-64'
+				className='h-dvh flex w-full font-merriweather lg:py-10 lg:px-72'
 			>
 				<div className='relative w-full h-full md:h-auto flex m-auto flex-col gap-4 p-2 lg:p-5 bg-theme-purple text-white md:rounded-lg overflow-hidden shadow-lg shadow-black/50'>
 					<div>

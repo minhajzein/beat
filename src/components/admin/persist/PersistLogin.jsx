@@ -8,6 +8,7 @@ import {
 	setCredentials,
 } from '../../../redux/slices/authSlice'
 import { toast } from 'react-toastify'
+import Loading from '../../loading/Loading'
 
 //⚡⚡⚡⚡⚡ Imports ⚡⚡⚡⚡⚡
 
@@ -51,7 +52,7 @@ const PersistLoginComp = () => {
 	if (!persist) {
 		content = <Outlet />
 	} else if (isLoading) {
-		content = <h1>Loading...</h1>
+		content = <Loading />
 	} else if (isError) {
 		content = <Outlet />
 	} else if (isSuccess && truePersist) {

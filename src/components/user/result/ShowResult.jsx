@@ -13,7 +13,7 @@ function ShowResult() {
 		<Navigate to='/' state={{ from: location }} replace />
 	) : (
 		isSuccess && (
-			<div className='h-dvh flex w-full font-merriweather font-thin lg:py-4 lg:px-64'>
+			<div className='h-dvh flex w-full font-merriweather font-thin lg:py-4 lg:px-72'>
 				<div className='relative w-full h-full md:h-auto flex m-auto flex-col gap-3 overflow-y-auto p-2 lg:p-5 bg-theme-purple text-white md:rounded-lg overflow-hidden shadow-lg shadow-black/50'>
 					<div>
 						<img

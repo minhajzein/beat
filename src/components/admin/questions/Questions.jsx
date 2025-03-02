@@ -1,11 +1,16 @@
 import { useNavigate } from 'react-router-dom'
 import { useGetAllQuestionsQuery } from '../../../redux/apiSlices/questonsSlice'
 import SingleQuestion from './SingleQuestion'
+import { ImSpinner } from 'react-icons/im'
 
 function Questions() {
 	const navigate = useNavigate()
 	const { data: questions, isLoading, isSuccess } = useGetAllQuestionsQuery()
-	return (
+	return isLoading ? (
+		<div className='w-full flex justify-center items-center p-4'>
+			<ImSpinner className='animate-spin' />
+		</div>
+	) : (
 		<div className='w-full flex flex-col gap-4'>
 			<div className='flex justify-between border p-4 items-center border-secondary-green rounded-lg bg-secondary-white border-dashed'>
 				<h1 className='font-bold text-xl'>Manage Questions</h1>

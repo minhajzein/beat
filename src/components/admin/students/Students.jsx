@@ -4,6 +4,7 @@ import { Button, Input, Popconfirm, Space, Table, Tag } from 'antd'
 import Highlighter from 'react-highlight-words'
 import { useGetAllStudentQuery } from '../../../redux/apiSlices/studentApiSlice'
 import { Link } from 'react-router-dom'
+import { ImSpinner } from 'react-icons/im'
 
 function Students() {
 	const { data: students, isLoading, isError } = useGetAllStudentQuery()
@@ -215,10 +216,15 @@ function Students() {
 		},
 	]
 
-	return (
+	return isLoading ? (
+		<div className='w-full flex justify-center items-center p-4'>
+			<ImSpinner className='animate-spin' />
+		</div>
+	) : (
 		<Table
 			className='w-full'
 			columns={columns}
+			pagination={{ pageSize: 7 }}
 			dataSource={isLoading ? [] : students}
 		/>
 	)
