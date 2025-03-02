@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 import { FcFullTrash } from 'react-icons/fc'
 import { useCreateQuestionMutation } from '../../../redux/apiSlices/questonsSlice'
 import { useNavigate } from 'react-router-dom'
+import { Loading3QuartersOutlined } from '@ant-design/icons'
 
 function QuestionForm() {
 	const { data: questionTypes } = useGetAllQuestionTypesQuery()
@@ -101,7 +102,7 @@ function QuestionForm() {
 						size='large'
 					/>
 				</div>
-				<div>
+				<div className='w-full'>
 					<label htmlFor='answer' className='text-sm text-gray-500'>
 						Answers (minimum 3 answers)
 					</label>
@@ -137,9 +138,9 @@ function QuestionForm() {
 							<button
 								onClick={addAnswer}
 								type='button'
-								className='px-4 py-1 bg-theme-purple rounded text-white'
+								className='p-3 bg-secondary-green rounded text-white'
 							>
-								+Add
+								<img src='/images/add.png' alt='+Add' />
 							</button>
 						</div>
 						{answers.map(answer => (
@@ -147,27 +148,49 @@ function QuestionForm() {
 								key={answer.id}
 								className='flex justify-center items-center gap-5'
 							>
-								<Input value={answer.answer} size='large' />
-								<Input value={answer.stream} size='large' />
+								<Input
+									className='border border-secondary-green'
+									value={answer.answer}
+									size='large'
+								/>
+								<Input
+									className='border border-secondary-green'
+									value={answer.stream}
+									size='large'
+								/>
 								<button
 									onClick={() => deleteAnswer(answer.id)}
-									className='px-4 py-1 bg-theme-red rounded text-white'
+									className='p-4 bg-theme-red rounded text-white'
 								>
-									<FcFullTrash />
+									<img src='/images/delete.png' alt='' />
 								</button>
 							</div>
 						))}
 					</div>
 				</div>
-				{answers.length >= 3 && (
+				<div className='flex gap-5 justify-end'>
 					<button
-						className='px-4 py-1 bg-theme-purple rounded text-white'
-						type='submit'
+						className='px-8 py-2 border border-theme-purple rounded text-theme-purple'
+						type='button'
+						onClick={() => navigate('/admin/questions')}
 						disabled={isLoading}
 					>
-						Save Question
+						Back
 					</button>
-				)}
+					{answers.length >= 3 && (
+						<button
+							className='px-8 py-2 bg-theme-purple rounded text-white'
+							type='submit'
+							disabled={isLoading}
+						>
+							{isLoading ? (
+								<Loading3QuartersOutlined className='animate-spin' />
+							) : (
+								'Save'
+							)}
+						</button>
+					)}
+				</div>
 			</form>
 		</div>
 	)

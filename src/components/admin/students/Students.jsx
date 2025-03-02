@@ -146,16 +146,16 @@ function Students() {
 	const columns = [
 		{
 			title: 'Full Name',
-			dataIndex: 'studentName',
-			key: 'name',
-			...getColumnSearchProps('studentName'),
+			dataIndex: 'fullName',
+			key: 'fullName',
+			width: '20%',
+			...getColumnSearchProps('fullName'),
 		},
 		{
-			title: 'Email',
-			dataIndex: 'email',
-			key: 'email',
-			width: '20%',
-			...getColumnSearchProps('email'),
+			title: 'District',
+			dataIndex: 'district',
+			key: 'district',
+			...getColumnSearchProps('district'),
 		},
 		{
 			title: 'Phone',
@@ -174,7 +174,6 @@ function Students() {
 			title: 'Status',
 			dataIndex: 'status',
 			key: 'status',
-			width: '20%',
 			...getColumnSearchProps('status'),
 			render: (_, { status }) => (
 				<Tag
@@ -220,14 +219,7 @@ function Students() {
 		<Table
 			className='w-full'
 			columns={columns}
-			dataSource={
-				isLoading
-					? []
-					: students.map(student => {
-							let studentName = student.firstName + ' ' + student.surname
-							return { ...student, studentName }
-					  })
-			}
+			dataSource={isLoading ? [] : students}
 		/>
 	)
 }

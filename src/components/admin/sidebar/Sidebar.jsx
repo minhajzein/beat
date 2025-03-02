@@ -8,7 +8,6 @@ import {
 	FcDataConfiguration,
 	FcHome,
 	FcConferenceCall,
-	FcTodoList,
 	FcQuestions,
 } from 'react-icons/fc'
 
@@ -22,16 +21,10 @@ const SidebarData = [
 		color: 'bg-gray-500',
 	},
 	{
-		name: 'Students',
+		name: 'Responses',
 		icon: FcConferenceCall,
-		path: '/admin/students',
+		path: '/admin/responses',
 		color: 'bg-red-500',
-	},
-	{
-		name: 'Results',
-		icon: FcTodoList,
-		path: '/admin/results',
-		color: 'bg-violet-500',
 	},
 	{
 		name: 'Questions',
@@ -39,7 +32,6 @@ const SidebarData = [
 		path: '/admin/questions',
 		color: 'bg-red-500',
 	},
-
 	{
 		name: 'Data Manage',
 		icon: FcDataConfiguration,
@@ -61,11 +53,11 @@ function SideBar() {
 
 	return (
 		<div
-			className={`h-screen transition-all duration-300 ${
+			className={`h-dvh transition-all duration-300 ${
 				isOpen ? 'md:w-52 w-14' : 'w-14'
-			} text-white opacity-90 bg-gray-950 hidden md:block`}
+			} text-white md:flex flex-col justify-between opacity-90 bg-theme-purple hidden`}
 		>
-			<div className='flex flex-col h-full shadow-lg'>
+			<div className='flex flex-col'>
 				<div className='flex items-center justify-center p-2 md:p-4'>
 					{isOpen && (
 						<div
@@ -74,15 +66,14 @@ function SideBar() {
 							}`}
 						>
 							<img
-								className='rounded w-full object-contain'
+								className='rounded w-2/3 object-contain'
 								src='/images/beat_logo.png'
 								alt=''
 							/>
 						</div>
 					)}
 				</div>
-				<hr />
-				<div className='flex-grow mt-2'>
+				<div className='flex flex-col mt-16 gap-4'>
 					{SidebarData.map((data, i) => {
 						const Icon = data.icon
 						const itemColor = isActive(data.path)
@@ -114,25 +105,25 @@ function SideBar() {
 						)
 					})}
 				</div>
-				<div className='p-3 hidden md:block'>
-					<div className='flex items-center justify-end'>
-						{isOpen && (
-							<div className='text-[.6rem] font-thin flex justify-end w-full mr-5'>
-								Beat Educations version 1.0
-							</div>
-						)}
+			</div>
+			<div className='p-3 hidden md:block'>
+				<div className='flex items-center justify-end'>
+					{isOpen && (
+						<div className='text-[.6rem] font-thin flex justify-end w-full mr-5'>
+							Beat Educations version 1.0
+						</div>
+					)}
 
-						<button
-							onClick={toggleSidebar}
-							className='ml-auto text-[.6rem] cursor-pointer text-gray-200 p-2'
-						>
-							{isOpen ? (
-								<IoIosArrowDropleftCircle className='h-5 w-5' />
-							) : (
-								<IoIosArrowDroprightCircle className='h-5 w-5' />
-							)}
-						</button>
-					</div>
+					<button
+						onClick={toggleSidebar}
+						className='ml-auto text-[.6rem] cursor-pointer text-gray-200 p-2'
+					>
+						{isOpen ? (
+							<IoIosArrowDropleftCircle className='h-5 w-5' />
+						) : (
+							<IoIosArrowDroprightCircle className='h-5 w-5' />
+						)}
+					</button>
 				</div>
 			</div>
 		</div>

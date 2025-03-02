@@ -37,7 +37,7 @@ function QuestionType() {
 		<div className='flex flex-col gap-4 w-full'>
 			<form onSubmit={handleSubmit} className='flex w-full gap-4'>
 				<input
-					className='p-2 text-xs shadow shadow-black w-full rounded outline-none'
+					className='p-2 text-sm border border-secondary-green w-full rounded outline-none'
 					placeholder='Add New Question Type...'
 					type='text'
 					value={type}
@@ -46,7 +46,7 @@ function QuestionType() {
 				<button
 					type='submit'
 					disabled={isLoading}
-					className='px-4 py-1 bg-theme-red rounded text-white'
+					className='px-4 py-1 bg-secondary-green rounded text-white'
 				>
 					{isLoading ? <ImSpinner className='animate-spin' /> : '+Add'}
 				</button>

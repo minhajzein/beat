@@ -7,11 +7,11 @@ function Questions() {
 	const { data: questions, isLoading, isSuccess } = useGetAllQuestionsQuery()
 	return (
 		<div className='w-full flex flex-col gap-4'>
-			<div className='flex justify-between'>
-				<h1 className='font-bold text-xl'>Questions</h1>
+			<div className='flex justify-between border p-4 items-center border-secondary-green rounded-lg bg-secondary-white border-dashed'>
+				<h1 className='font-bold text-xl'>Manage Questions</h1>
 				<button
 					onClick={() => navigate('/admin/add-question')}
-					className='rounded px-4 py-2 bg-theme-red text-white'
+					className='rounded px-4 py-2 bg-secondary-green text-white'
 				>
 					+Add New
 				</button>

@@ -19,7 +19,7 @@ function AdminRoutes() {
 				<Route element={<RequireAuth />}>
 					<Route path='/' element={<Layout />}>
 						<Route path='/' element={<Home />} />
-						<Route path='students' element={<Students />} />
+						<Route path='responses' element={<Students />} />
 						<Route path='manage-data' element={<DataManage />} />
 						<Route path='questions' element={<Questions />} />
 						<Route path='add-question' element={<QuestionForm />} />

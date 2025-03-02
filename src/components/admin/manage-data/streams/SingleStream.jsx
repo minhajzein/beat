@@ -3,13 +3,13 @@ import { FcFullTrash } from 'react-icons/fc'
 
 function SingleStream({ stream }) {
 	return (
-		<div className='flex justify-between items-center rounded border border-theme-red py-2 px-4'>
+		<div className='flex justify-between items-center rounded border border-secondary-green py-2 px-4'>
 			<h1>{stream.stream}</h1>
 			<div className='flex gap-4'>
-				<button className='p-2 rounded bg-theme-purple text-theme-red'>
+				<button className='p-2 rounded bg-secondary-green text-white'>
 					<AiOutlineEdit />
 				</button>
-				<button className='p-2 rounded bg-theme-red'>
+				<button className='p-2 rounded bg-theme-red text-white'>
 					<FcFullTrash />
 				</button>
 			</div>

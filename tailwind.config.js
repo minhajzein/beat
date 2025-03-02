@@ -9,7 +9,9 @@ export default {
       colors: {
         'theme-red': '#E20941',
         'theme-purple': '#461BA6',
-        'secondary-blue': '#60C0D9'
+        'secondary-blue': '#60C0D9',
+        'secondary-green': '#008080',
+        'secondary-white': '#E6E6FA'
       },
       fontFamily: {
         merriweather: ['"Merriweather Sans"', 'serif']

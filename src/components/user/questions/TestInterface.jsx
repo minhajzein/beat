@@ -60,44 +60,53 @@ function TestInterface() {
 		<Navigate to='/' state={{ from: location }} replace />
 	) : (
 		isSuccess && (
-			<div loading={isLoading} className='h-dvh w-full lg:p-24 bg-theme-purple'>
-				<div className='relative w-full h-full rounded-lg overflow-hidden shadow-lg shadow-black/50'>
+			<div
+				loading={isLoading}
+				className='h-dvh flex w-full font-merriweather lg:py-10 lg:px-64'
+			>
+				<div className='relative w-full h-full md:h-auto flex m-auto flex-col gap-4 p-2 lg:p-5 bg-theme-purple text-white md:rounded-lg overflow-hidden shadow-lg shadow-black/50'>
+					<div>
+						<img src='/images/thumps-up.png' className='w-1/8 h-24' alt='' />
+						<p className='font font-extralight text-xs md:text-sm'>
+							Congratulations! you are on the right path...{' '}
+						</p>
+					</div>
+					<h1 className='font-bold'>
+						{questionNumber + 1}.{test[questionNumber]?.question}
+					</h1>
 					<img
-						className='w-full h-full object-cover'
-						src='/images/register-image.jpg'
+						src='/images/beat_logo.png'
+						className='absolute lg:top-5 top-2 right-2 lg:w-20 object-contain lg:right-5'
 						alt=''
 					/>
-					<div className='w-full flex flex-col gap-5 text-white p-5 absolute top-0 left-0 h-full bg-gradient-to-b from-black from-20% to-transparent'>
-						<h1 className='font-bold'>
-							{questionNumber + 1}.{test[questionNumber]?.question}
-						</h1>
-						<div className='bg-white/50 backdrop-blur-sm p-5 rounded'>
-							<Radio.Group
-								className='flex flex-col gap-5 text-white'
-								value={currentAnswer}
-								onChange={e => setCurrentAnswer(e.target.value)}
-							>
-								{test[questionNumber]?.answers.map(ans => (
-									<Radio key={ans.id} value={ans.id}>
-										{ans.answer}
-									</Radio>
-								))}
-							</Radio.Group>
-							<label>
-								<input type='radio' name='gender' value='male' /> Male
+					<div className='flex flex-col gap-2 font-thin'>
+						{test[questionNumber]?.answers.map(ans => (
+							<label className='flex cursor-pointer justify-between bg-white text-black items-center p-2 rounded-lg'>
+								<h1 className='text-sm'>{ans.answer}</h1>
+								<input
+									type='radio'
+									className='bg-green-500 size-6 cursor-pointer text-green-500 outline-2'
+									name='answer'
+									checked={currentAnswer === ans.id}
+									value={ans.id}
+									onChange={e => setCurrentAnswer(e.target.value)}
+								/>
 							</label>
+						))}
+					</div>
+					<div className='flex justify-between'>
+						<div className='flex items-center gap-3'>
+							<p className='text-xs'>
+								{questionNumber + 1}/{test.length}
+							</p>
 						</div>
-						<div className='flex justify-end'>
-							<button
-								onClick={nextQuestion}
-								disabled={creatingResult}
-								className='bg-theme-red py-2 px-4 rounded text-white'
-							>
-								{test.length - 1 === questionNumber
-									? 'Submit'
-									: 'Next Question'}
-							</button>
-						</div>
+						<button
+							onClick={nextQuestion}
+							disabled={creatingResult}
+							className='bg-secondary-blue py-2 px-4 rounded text-white'
+						>
+							{test.length - 1 === questionNumber ? 'Submit' : 'Next'}
+						</button>
 					</div>
 				</div>
 			</div>

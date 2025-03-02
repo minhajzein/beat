@@ -33,6 +33,7 @@ function Courses() {
 			})
 			if (data.success) {
 				setNewCourse('')
+				setRelatedStreams([])
 				toast.success('Stream Created Successfully')
 			} else {
 				toast.error('Stream Creation Failed')
@@ -46,7 +47,7 @@ function Courses() {
 		<div className='flex flex-col gap-4 w-full'>
 			<form onSubmit={handleSubmit} className='flex w-full gap-4'>
 				<input
-					className='p-2 text-xs shadow shadow-black w-[50%] rounded outline-none'
+					className='p-2 text-sm border border-secondary-green w-[50%] rounded outline-none'
 					placeholder='Add New Course...'
 					newCourse='text'
 					value={newCourse}
@@ -56,13 +57,14 @@ function Courses() {
 				<Select
 					placeholder='Related Streams'
 					onChange={value => setRelatedStreams(value)}
+					value={relatedStreams}
 					showSearch
 					optionFilterProp='children'
 					filterOption={(input, option) =>
 						option.props.children.toLowerCase().indexOf(input.toLowerCase()) >=
 						0
 					}
-					className='w-[50%] shadow shadow-black rounded'
+					className='w-[50%] text-sm border border-secondary-green rounded'
 					mode='multiple'
 				>
 					{streams?.map(stream => (
@@ -74,7 +76,7 @@ function Courses() {
 				<button
 					newCourse='submit'
 					disabled={isLoading}
-					className='px-4 py-1 bg-theme-red rounded text-white'
+					className='px-4 py-1 bg-secondary-green rounded text-white'
 				>
 					{isLoading ? <ImSpinner className='animate-spin' /> : '+Add'}
 				</button>

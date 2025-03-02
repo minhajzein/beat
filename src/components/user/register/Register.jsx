@@ -64,8 +64,8 @@ function Register() {
 	})
 
 	return (
-		<div className='h-dvh w-full font-merriweather font-thin lg:px-80 lg:py-16'>
-			<div className='h-full w-full lg:grid lg:grid-cols-2 lg:rounded-lg shadow-lg shadow-black'>
+		<div className='h-dvh w-full font-merriweather md:px-60 lg:px-80 lg:py-16'>
+			<div className='h-full w-full min-w-[50%] lg:grid lg:grid-cols-2 lg:rounded-lg overflow-hidden shadow-lg shadow-black'>
 				<img
 					className='object-cover h-1/3 w-full object-top lg:h-full'
 					src='/images/register-image.png'
@@ -80,7 +80,7 @@ function Register() {
 					<h1 className='text-lg z-20'>Registration Form</h1>
 					<form
 						onSubmit={formik.handleSubmit}
-						className='flex flex-col gap-2 z-20'
+						className='flex flex-col gap-4 z-20'
 					>
 						<div className='flex flex-col'>
 							<label className='text-xs' htmlFor='fullName'>
@@ -105,7 +105,7 @@ function Register() {
 							</label>
 							<Input
 								addonBefore={<PhoneOutlined />}
-								placeholder='Enter phone number'
+								placeholder='9876543210'
 								prefix='+91'
 								name='phone'
 								onChange={formik.handleChange}
