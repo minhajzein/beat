@@ -64,10 +64,10 @@ function TestInterface() {
 				loading={isLoading}
 				className='h-dvh flex w-full font-merriweather lg:py-10 lg:px-72'
 			>
-				<div className='md:relative overflow-y-auto items-start w-full h-full md:h-auto flex m-auto flex-col gap-8 md:gap-4 p-4 lg:p-5 bg-theme-purple text-white md:rounded-lg overflow-hidden shadow-lg shadow-black/50'>
+				<div className='md:relative overflow-y-auto items-start w-full h-full md:h-auto flex m-auto flex-col gap-4 p-4 lg:p-5 bg-theme-purple text-white md:rounded-lg overflow-hidden shadow-lg shadow-black/50'>
 					<img
 						src='/images/beat_logo.png'
-						className='md:absolute h-20 md:top-5 md:w-20 object-contain md:right-5'
+						className='md:absolute h-16 md:top-5 md:w-20 object-contain md:right-5'
 						alt=''
 					/>
 					<div>
