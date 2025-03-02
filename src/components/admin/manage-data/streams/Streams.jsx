@@ -5,6 +5,7 @@ import {
 } from '../../../../redux/apiSlices/streamSlice'
 import { useState } from 'react'
 import { ImSpinner } from 'react-icons/im'
+import { toast } from 'react-toastify'
 
 function Streams() {
 	const {
@@ -21,11 +22,11 @@ function Streams() {
 		try {
 			if (newStream === '') return toast.error('Please Enter a Question Type')
 			const { data } = await createStream({ stream: newStream })
-			if (data.success) {
+			if (data?.success) {
 				setNewStream('')
 				toast.success('Stream Created Successfully')
 			} else {
-				toast.error('Stream Creation Failed')
+				toast.error(data?.message)
 			}
 		} catch (error) {
 			console.error(error)

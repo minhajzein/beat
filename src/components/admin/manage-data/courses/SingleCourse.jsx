@@ -11,7 +11,9 @@ function SingleCourse({ course }) {
 				<h1 className='text-xs'>Related Streams:</h1>
 				<div className='flex gap-2'>
 					{course.relatedStreams.map(stream => (
-						<Tag color='magenta'>{stream}</Tag>
+						<Tag key={stream} color='magenta'>
+							{stream}
+						</Tag>
 					))}
 				</div>
 			</div>

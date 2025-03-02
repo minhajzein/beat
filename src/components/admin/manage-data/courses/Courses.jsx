@@ -31,12 +31,12 @@ function Courses() {
 				name: newCourse,
 				relatedStreams: relatedStreams,
 			})
-			if (data.success) {
+			if (data?.success) {
 				setNewCourse('')
 				setRelatedStreams([])
 				toast.success('Stream Created Successfully')
 			} else {
-				toast.error('Stream Creation Failed')
+				toast.error(data?.message)
 			}
 		} catch (error) {
 			console.error(error)

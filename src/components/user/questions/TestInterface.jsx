@@ -64,24 +64,26 @@ function TestInterface() {
 				loading={isLoading}
 				className='h-dvh flex w-full font-merriweather lg:py-10 lg:px-72'
 			>
-				<div className='relative w-full h-full md:h-auto flex m-auto flex-col gap-4 p-2 lg:p-5 bg-theme-purple text-white md:rounded-lg overflow-hidden shadow-lg shadow-black/50'>
+				<div className='md:relative overflow-y-auto items-start w-full h-full md:h-auto flex m-auto flex-col gap-8 md:gap-4 p-4 lg:p-5 bg-theme-purple text-white md:rounded-lg overflow-hidden shadow-lg shadow-black/50'>
+					<img
+						src='/images/beat_logo.png'
+						className='md:absolute h-20 lg:top-5 lg:w-20 object-contain lg:right-5'
+						alt=''
+					/>
 					<div>
-						<img src='/images/thumps-up.png' className='w-1/8 h-24' alt='' />
-						<p className='font font-extralight text-xs md:text-sm'>
+						<img src='/images/thumps-up.png' className='md:h-24' alt='' />
+						<p className='font font-extralight text-lg md:text-sm'>
 							Congratulations! you are on the right path...{' '}
 						</p>
 					</div>
-					<h1 className='font-bold'>
+
+					<h1 className='font-bold text-xl md:text-md'>
 						{questionNumber + 1}.{test[questionNumber]?.question}
 					</h1>
-					<img
-						src='/images/beat_logo.png'
-						className='absolute lg:top-5 top-2 right-2 lg:w-20 object-contain lg:right-5'
-						alt=''
-					/>
-					<div className='flex flex-col gap-2 font-thin'>
+
+					<div className='flex flex-col w-full gap-6 lg:gap-2 font-thin'>
 						{test[questionNumber]?.answers.map(ans => (
-							<label className='flex cursor-pointer justify-between bg-white text-black items-center p-2 rounded-lg'>
+							<label className='flex cursor-pointer justify-between bg-white text-black items-center w-full py-4 px-3 rounded-lg'>
 								<h1 className='text-sm'>{ans.answer}</h1>
 								<input
 									type='radio'
@@ -94,8 +96,8 @@ function TestInterface() {
 							</label>
 						))}
 					</div>
-					<div className='flex justify-between'>
-						<div className='flex items-center gap-3'>
+					<div className='flex flex-col gap-6 items-center w-full md:flex-row justify-between'>
+						<div className='md:flex hidden items-center gap-3'>
 							<p className='text-xs'>
 								{questionNumber + 1}/{test.length}
 							</p>
@@ -103,10 +105,15 @@ function TestInterface() {
 						<button
 							onClick={nextQuestion}
 							disabled={creatingResult}
-							className='bg-secondary-blue py-2 px-4 rounded text-white'
+							className='bg-secondary-blue w-full md:w-auto p-4 rounded text-white'
 						>
 							{test.length - 1 === questionNumber ? 'Submit' : 'Next'}
 						</button>
+						<div className='flex md:hidden items-center gap-3'>
+							<p className='text-xs'>
+								{questionNumber + 1}/{test.length}
+							</p>
+						</div>
 					</div>
 				</div>
 			</div>
