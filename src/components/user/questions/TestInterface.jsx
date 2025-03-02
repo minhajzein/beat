@@ -71,8 +71,8 @@ function TestInterface() {
 						alt=''
 					/>
 					<div>
-						<img src='/images/thumps-up.png' className='md:h-24' alt='' />
-						<p className='font font-extralight text-lg md:text-sm'>
+						<img src='/images/thumps-up.png' className='h-24' alt='' />
+						<p className='font font-extralight md:text-sm'>
 							Congratulations! you are on the right path...{' '}
 						</p>
 					</div>
@@ -81,7 +81,7 @@ function TestInterface() {
 						{questionNumber + 1}.{test[questionNumber]?.question}
 					</h1>
 
-					<div className='flex flex-col w-full gap-6 lg:gap-2 font-thin'>
+					<div className='flex flex-col w-full gap-4 lg:gap-2 font-thin'>
 						{test[questionNumber]?.answers.map(ans => (
 							<label className='flex cursor-pointer justify-between bg-white text-black items-center w-full py-4 px-3 md:p-2 rounded-lg'>
 								<h1 className='text-sm'>{ans.answer}</h1>

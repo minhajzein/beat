@@ -23,10 +23,10 @@ function ShowResult() {
 					<div className='flex flex-col items-start'>
 						<img
 							src='/images/celebration.png'
-							className='md:h-24 h-36 object-contain'
+							className='md:h-24 object-contain'
 							alt=''
 						/>
-						<p className='md:text-xs'>
+						<p className='text-xs'>
 							Congratulation! you are successfully completed the assessment.
 						</p>
 					</div>
