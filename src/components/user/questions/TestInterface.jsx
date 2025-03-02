@@ -67,7 +67,7 @@ function TestInterface() {
 				<div className='md:relative overflow-y-auto items-start w-full h-full md:h-auto flex m-auto flex-col gap-8 md:gap-4 p-4 lg:p-5 bg-theme-purple text-white md:rounded-lg overflow-hidden shadow-lg shadow-black/50'>
 					<img
 						src='/images/beat_logo.png'
-						className='md:absolute h-20 lg:top-5 lg:w-20 object-contain lg:right-5'
+						className='md:absolute h-20 md:top-5 md:w-20 object-contain md:right-5'
 						alt=''
 					/>
 					<div>
@@ -83,7 +83,7 @@ function TestInterface() {
 
 					<div className='flex flex-col w-full gap-6 lg:gap-2 font-thin'>
 						{test[questionNumber]?.answers.map(ans => (
-							<label className='flex cursor-pointer justify-between bg-white text-black items-center w-full py-4 px-3 rounded-lg'>
+							<label className='flex cursor-pointer justify-between bg-white text-black items-center w-full py-4 px-3 md:p-2 rounded-lg'>
 								<h1 className='text-sm'>{ans.answer}</h1>
 								<input
 									type='radio'
