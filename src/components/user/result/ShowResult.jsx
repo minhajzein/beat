@@ -14,7 +14,7 @@ function ShowResult() {
 	) : (
 		isSuccess && (
 			<div className='h-dvh flex w-full font-merriweather font-thin lg:py-4 lg:px-72'>
-				<div className='md:relative items-start p-4 w-full h-full md:h-auto flex m-auto flex-col gap-6 md:gap-3 overflow-y-auto lg:p-5 bg-theme-purple text-white md:rounded-lg overflow-hidden shadow-lg shadow-black/50'>
+				<div className='md:relative items-start p-4 w-full h-full md:h-auto flex m-auto flex-col gap-4 md:gap-3 overflow-y-auto lg:p-5 bg-theme-purple text-white md:rounded-lg overflow-hidden shadow-lg shadow-black/50'>
 					<img
 						src='/images/beat_logo.png'
 						className='md:absolute h-20 md:top-5 md:w-20 object-contain md:right-5'
@@ -23,7 +23,7 @@ function ShowResult() {
 					<div className='flex flex-col items-start'>
 						<img
 							src='/images/celebration.png'
-							className='md:h-24 object-contain'
+							className='h-24 object-contain'
 							alt=''
 						/>
 						<p className='text-xs'>
@@ -55,18 +55,18 @@ function ShowResult() {
 					<h1 className='font-semibold text-lg md:text-sm'>
 						Feel free to contact us,
 					</h1>
-					<p className='md:text-xs'>
+					<p className='text-xs'>
 						For more information about our educational group for professional
 						studies, please feel free to contact us. Our team is happy to assist
 						you with inquiries about programs, admissions, and other details.
 					</p>
 					<div className='flex gap-3 text-lg md:text-sm'>
-						<button className='bg-secondary-blue p-4 md:py-2 md:px-4 rounded-lg text-white'>
+						<button className='bg-secondary-blue p-3 md:py-2 md:px-4 rounded-lg text-white'>
 							Contact our executive
 						</button>
 						<Link
 							to='/'
-							className='md:py-2 md:px-4 py-4 px-8 border border-white rounded-lg'
+							className='md:py-2 md:px-4 py-3 px-8 border border-white rounded-lg'
 						>
 							Exit
 						</Link>
