@@ -7,9 +7,9 @@ function ShowResult() {
 	const studentId = useSelector(state => state.student.student)
 	const { data: result, isSuccess, isLoading } = useGetResultQuery(studentId)
 	const location = useLocation()
-	console.log(result)
+	const status = useSelector(state => state.status.status)
 
-	return !studentId ? (
+	return !studentId || status !== 'submitted' ? (
 		<Navigate to='/' state={{ from: location }} replace />
 	) : (
 		isSuccess && (

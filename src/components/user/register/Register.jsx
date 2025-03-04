@@ -10,8 +10,8 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useRegisterMutation } from '../../../redux/apiSlices/studentApiSlice'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { Navigate, useLocation, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { changeStatus } from '../../../redux/slices/statusSlice'
 import { storeStudentId } from '../../../redux/slices/studentSlice'
 import { keralaDistricts } from '../../../config/districts'
@@ -22,6 +22,8 @@ function Register() {
 	const [register, { isLoading, isError, error }] = useRegisterMutation()
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
+	const location = useLocation()
+	const status = useSelector(state => state.status.status)
 
 	const formik = useFormik({
 		initialValues: {
@@ -62,7 +64,11 @@ function Register() {
 		},
 	})
 
-	return (
+	return status === 'registered' ? (
+		<Navigate to='/take-test' state={{ from: location }} replace />
+	) : status === 'submitted' ? (
+		<Navigate to='/result' state={{ from: location }} replace />
+	) : (
 		<div className='h-dvh w-full font-merriweather md:px-60 lg:px-80 lg:py-16'>
 			<div className='h-full w-full min-w-[50%] lg:grid lg:grid-cols-2 lg:rounded-lg overflow-hidden shadow-lg shadow-black'>
 				<img

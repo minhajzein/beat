@@ -5,7 +5,6 @@ import {
 	useGetTestQuestionsQuery,
 } from '../../../redux/apiSlices/studentApiSlice'
 import { useState } from 'react'
-import { Radio } from 'antd'
 import { toast } from 'react-toastify'
 import { changeStatus } from '../../../redux/slices/statusSlice'
 
@@ -59,8 +58,8 @@ function TestInterface() {
 		}
 	}
 
-	return status !== 'registered' ? (
-		<Navigate to='/' state={{ from: location }} replace />
+	return status === 'submitted' ? (
+		<Navigate to='/result' state={{ from: location }} replace />
 	) : (
 		isSuccess && (
 			<div
