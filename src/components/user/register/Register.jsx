@@ -1,6 +1,5 @@
 import {
 	Loading3QuartersOutlined,
-	MailOutlined,
 	PhoneOutlined,
 	RocketOutlined,
 	TrophyOutlined,

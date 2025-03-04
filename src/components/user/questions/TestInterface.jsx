@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import {
 	useCreateResultMutation,
@@ -7,6 +7,7 @@ import {
 import { useState } from 'react'
 import { Radio } from 'antd'
 import { toast } from 'react-toastify'
+import { changeStatus } from '../../../redux/slices/statusSlice'
 
 function TestInterface() {
 	const { data: test, isLoading, isSuccess } = useGetTestQuestionsQuery()
@@ -18,6 +19,7 @@ function TestInterface() {
 	const status = useSelector(state => state.status.status)
 	const studentId = useSelector(state => state.student.student)
 	const navigate = useNavigate()
+	const dispatch = useDispatch()
 	const location = useLocation()
 
 	const nextQuestion = async () => {
@@ -45,6 +47,7 @@ function TestInterface() {
 					],
 				})
 				if (data?.success) {
+					dispatch(changeStatus('submitted'))
 					toast.success('Your answer submitted successfully')
 					navigate('/result')
 				} else {
