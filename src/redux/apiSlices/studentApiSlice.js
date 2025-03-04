@@ -67,6 +67,13 @@ const studentApiSlice = apiSlice.injectEndpoints({
                     type: 'Students', id: 'LIST'
                 }]
             }
+        }),
+        deleteResponse: builder.mutation({
+            query: (studentId) => ({
+                url: `/admin/students/delete-response/${studentId}`,
+                method: 'DELETE'
+            }),
+            invalidatesTags: ['Students']
         })
     })
 })
@@ -76,6 +83,7 @@ export const {
     useCreateResultMutation,
     useGetResultQuery,
     useGetAllStudentQuery,
+    useDeleteResponseMutation,
     useGetTestQuestionsQuery,
     useLazyGetAllStudentQuery,
 } = studentApiSlice

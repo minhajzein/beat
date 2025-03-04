@@ -2,9 +2,13 @@ import { useRef, useState } from 'react'
 import { SearchOutlined } from '@ant-design/icons'
 import { Button, Input, Popconfirm, Space, Table, Tag } from 'antd'
 import Highlighter from 'react-highlight-words'
-import { useGetAllStudentQuery } from '../../../redux/apiSlices/studentApiSlice'
+import {
+	useDeleteResponseMutation,
+	useGetAllStudentQuery,
+} from '../../../redux/apiSlices/studentApiSlice'
 import { Link } from 'react-router-dom'
 import { ImSpinner } from 'react-icons/im'
+import { toast } from 'react-toastify'
 
 function Students() {
 	const { data: students, isLoading, isError } = useGetAllStudentQuery()
@@ -12,23 +16,23 @@ function Students() {
 	const [searchedColumn, setSearchedColumn] = useState('')
 	const searchInput = useRef(null)
 	const [open, setOpen] = useState('')
-	const [confirmLoading, setConfirmLoading] = useState(false)
+	const [deleteResponse, { isLoading: deleting }] = useDeleteResponseMutation()
 
 	const showPopconfirm = id => {
 		setOpen(id)
 	}
 
-	const handleOk = () => {
-		setConfirmLoading(true)
-		setTimeout(() => {
-			setOpen(false)
-			setConfirmLoading(false)
-		}, 2000)
+	const handleOk = async () => {
+		try {
+			const { data } = await deleteResponse(open)
+			if (data.success) toast.success(data.message)
+		} catch (error) {
+			console.error(error)
+		}
 	}
 
 	const handleCancel = () => {
-		console.log('Clicked cancel button')
-		setOpen(false)
+		setOpen('')
 	}
 
 	const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -36,6 +40,7 @@ function Students() {
 		setSearchText(selectedKeys[0])
 		setSearchedColumn(dataIndex)
 	}
+
 	const handleReset = clearFilters => {
 		clearFilters()
 		setSearchText('')
@@ -195,15 +200,15 @@ function Students() {
 			key: 'action',
 			render: (_, record) => (
 				<Space size='middle'>
-					<Link to={`/student/${record._id}`}>Profile {record.lastName}</Link>
+					<Link to={`/admin/profile/${record._id}`}>Profile</Link>
 					<Popconfirm
 						title='Delete Student?'
 						placement='left'
-						description={`Delete data of ${record.studentName}`}
+						description={`Delete data of ${record.fullName}`}
 						open={open === record._id}
 						onConfirm={handleOk}
 						okButtonProps={{
-							loading: confirmLoading,
+							loading: deleting,
 						}}
 						onCancel={handleCancel}
 					>

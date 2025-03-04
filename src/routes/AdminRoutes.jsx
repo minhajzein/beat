@@ -8,6 +8,7 @@ import Students from '../components/admin/students/Students'
 import DataManage from '../components/admin/manage-data/DataManage'
 import Questions from '../components/admin/questions/Questions'
 import QuestionForm from '../components/admin/questions/QuestionForm'
+import UserProfile from '../components/admin/user-profile/UserProfile'
 
 function AdminRoutes() {
 	return (
@@ -20,6 +21,7 @@ function AdminRoutes() {
 					<Route path='/' element={<Layout />}>
 						<Route path='/' element={<Home />} />
 						<Route path='responses' element={<Students />} />
+						<Route path='profile/:id' element={<UserProfile />} />
 						<Route path='manage-data' element={<DataManage />} />
 						<Route path='questions' element={<Questions />} />
 						<Route path='add-question' element={<QuestionForm />} />

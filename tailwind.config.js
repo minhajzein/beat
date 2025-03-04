@@ -11,7 +11,8 @@ export default {
         'theme-purple': '#461BA6',
         'secondary-blue': '#60C0D9',
         'secondary-green': '#008080',
-        'secondary-white': '#E6E6FA'
+        'secondary-white': '#E6E6FA',
+        'purple-light': '#9D67C6'
       },
       fontFamily: {
         merriweather: ['"Merriweather Sans"', 'serif']
