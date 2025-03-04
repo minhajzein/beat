@@ -1,13 +1,18 @@
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useGetResultQuery } from '../../../redux/apiSlices/studentApiSlice'
-import { Link, Navigate, useLocation } from 'react-router-dom'
-import { IoArrowRedoCircleSharp } from 'react-icons/io5'
+import { Navigate, useLocation } from 'react-router-dom'
+import { changeStatus } from '../../../redux/slices/statusSlice'
 
 function ShowResult() {
 	const studentId = useSelector(state => state.student.student)
 	const { data: result, isSuccess, isLoading } = useGetResultQuery(studentId)
 	const location = useLocation()
+	const dispatch = useDispatch()
 	const status = useSelector(state => state.status.status)
+
+	const exit = () => {
+		dispatch(changeStatus(''))
+	}
 
 	return !studentId || status !== 'submitted' ? (
 		<Navigate to='/' state={{ from: location }} replace />
@@ -64,12 +69,12 @@ function ShowResult() {
 						<button className='bg-secondary-blue p-3 md:py-2 md:px-4 rounded-lg text-white'>
 							Contact our executive
 						</button>
-						<Link
-							to='/'
+						<button
+							onClick={exit}
 							className='md:py-2 md:px-4 py-3 px-8 border border-white rounded-lg'
 						>
 							Exit
-						</Link>
+						</button>
 					</div>
 				</div>
 			</div>
