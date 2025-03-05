@@ -33,7 +33,7 @@ const SidebarData = [
 		color: 'bg-red-500',
 	},
 	{
-		name: 'Data Manage',
+		name: 'Manage Data',
 		icon: FcDataConfiguration,
 		path: '/admin/manage-data',
 		color: 'bg-red-500',

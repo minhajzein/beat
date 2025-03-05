@@ -5,7 +5,7 @@ import { changeStatus } from '../../../redux/slices/statusSlice'
 
 function ShowResult() {
 	const studentId = useSelector(state => state.student.student)
-	const { data: result, isSuccess, isLoading } = useGetResultQuery(studentId)
+	const { data: result, isSuccess } = useGetResultQuery(studentId)
 	const location = useLocation()
 	const dispatch = useDispatch()
 	const status = useSelector(state => state.status.status)

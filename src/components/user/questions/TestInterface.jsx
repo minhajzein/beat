@@ -7,6 +7,8 @@ import {
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { changeStatus } from '../../../redux/slices/statusSlice'
+import Timer from './Timer'
+import { Loading3QuartersOutlined } from '@ant-design/icons'
 
 function TestInterface() {
 	const { data: test, isLoading, isSuccess } = useGetTestQuestionsQuery()
@@ -58,14 +60,35 @@ function TestInterface() {
 		}
 	}
 
+	const onTimerEnd = async () => {
+		try {
+			if (result.length === 0) {
+				dispatch(changeStatus(''))
+				navigate('/')
+				return toast.error('Your time is over, please try again')
+			}
+			toast.error('Your time is over')
+			const { data } = await createResult({
+				studentId: studentId,
+				result: result,
+			})
+			if (data?.success) {
+				dispatch(changeStatus('submitted'))
+				toast.success('Your answer submitted successfully')
+				navigate('/result')
+			} else {
+				toast.error('Something went wrong! Please try again later')
+			}
+		} catch (error) {
+			console.error(error)
+		}
+	}
+
 	return status === 'submitted' ? (
 		<Navigate to='/result' state={{ from: location }} replace />
 	) : (
 		isSuccess && (
-			<div
-				loading={isLoading}
-				className='h-dvh flex w-full font-merriweather lg:py-10 lg:px-72'
-			>
+			<div className='h-dvh flex w-full font-merriweather lg:py-10 lg:px-72'>
 				<div className='md:relative overflow-y-auto items-start w-full h-full md:h-auto flex m-auto flex-col gap-4 p-4 lg:p-5 bg-theme-purple text-white md:rounded-lg overflow-hidden shadow-lg shadow-black/50'>
 					<img
 						src='/images/beat_logo.png'
@@ -85,7 +108,10 @@ function TestInterface() {
 
 					<div className='flex flex-col w-full gap-4 lg:gap-2 font-thin'>
 						{test[questionNumber]?.answers.map(ans => (
-							<label className='flex cursor-pointer justify-between bg-white text-black items-center w-full py-4 px-3 md:p-2 rounded-lg'>
+							<label
+								key={ans.id}
+								className='flex cursor-pointer justify-between bg-white text-black items-center w-full py-4 px-3 md:p-2 rounded-lg'
+							>
 								<h1 className='text-sm'>{ans.answer}</h1>
 								<input
 									type='radio'
@@ -98,24 +124,26 @@ function TestInterface() {
 							</label>
 						))}
 					</div>
-					<div className='flex flex-col gap-6 items-center w-full md:flex-row justify-between'>
-						<div className='md:flex hidden items-center gap-3'>
+					<div className='flex gap-6 flex-col-reverse items-center w-full md:flex-row justify-between'>
+						<div className='flex items-center gap-3'>
 							<p className='text-xs'>
 								{questionNumber + 1}/{test.length}
 							</p>
+							<Timer initialTime={300} onTimerEnd={onTimerEnd} />
 						</div>
 						<button
 							onClick={nextQuestion}
-							disabled={creatingResult}
-							className='bg-secondary-blue w-full md:w-auto p-4 rounded text-white'
+							disabled={creatingResult || isLoading}
+							className='bg-secondary-blue w-full flex justify-center md:w-auto p-4 md:py-2 rounded text-white'
 						>
-							{test.length - 1 === questionNumber ? 'Submit' : 'Next'}
+							{creatingResult ? (
+								<Loading3QuartersOutlined className='animate-spin m-auto' />
+							) : test.length - 1 === questionNumber ? (
+								'Submit'
+							) : (
+								'Next'
+							)}
 						</button>
-						<div className='flex md:hidden items-center gap-3'>
-							<p className='text-xs'>
-								{questionNumber + 1}/{test.length}
-							</p>
-						</div>
 					</div>
 				</div>
 			</div>

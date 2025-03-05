@@ -3,3 +3,4 @@
 export const baseUri = 'https://api.reveinfotech.com'
 
 // export const baseUri = 'https://api.beateducations.com'
+
