@@ -17,6 +17,7 @@ function TestInterface() {
 	const [questionNumber, setQuestionNumber] = useState(0)
 	const [currentAnswer, setCurrentAnswer] = useState('')
 	const [result, setResult] = useState([])
+	const [time, setTime] = useState(300)
 	const status = useSelector(state => state.status.status)
 	const studentId = useSelector(state => state.student.student)
 	const navigate = useNavigate()
@@ -46,6 +47,11 @@ function TestInterface() {
 							answerId: currentAnswer,
 						},
 					],
+					timeTook: `${
+						String(Math.floor((300 - time) / 60)).length === 1
+							? '0' + Math.floor((300 - time) / 60)
+							: Math.floor((300 - time) / 60)
+					}:${(300 - time) % 60}`,
 				})
 				if (data?.success) {
 					dispatch(changeStatus('submitted'))
@@ -71,6 +77,7 @@ function TestInterface() {
 			const { data } = await createResult({
 				studentId: studentId,
 				result: result,
+				timeTook: `${Math.floor(time / 60)}:${time % 60}`,
 			})
 			if (data?.success) {
 				dispatch(changeStatus('submitted'))
@@ -129,7 +136,7 @@ function TestInterface() {
 							<p className='text-xs'>
 								{questionNumber + 1}/{test.length}
 							</p>
-							<Timer initialTime={300} onTimerEnd={onTimerEnd} />
+							<Timer time={time} setTime={setTime} onTimerEnd={onTimerEnd} />
 						</div>
 						<button
 							onClick={nextQuestion}
