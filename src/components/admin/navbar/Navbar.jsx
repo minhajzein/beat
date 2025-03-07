@@ -61,8 +61,12 @@ function Navbar() {
 					</div>
 					<h1 className='capitalize text-xl'>{pathname.slice(7)}</h1>
 				</div>
+			) : pathname.includes('/profile/') ? (
+				<div className='flex items-center'>
+					<h1 className='capitalize text-xl'>Profile</h1>
+				</div>
 			) : (
-				<div>
+				<div className='flex items-center'>
 					<h1 className='capitalize text-xl'>
 						{pathname.slice(7).replace('-', ' ')}
 					</h1>

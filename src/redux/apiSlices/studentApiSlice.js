@@ -42,6 +42,16 @@ const studentApiSlice = apiSlice.injectEndpoints({
             }),
         }),
 
+        getProfile: builder.query({
+            query: (studentId) => ({
+                url: `/admin/students/${studentId}`,
+                validateStatus: (response, result) => {
+                    return response.status === 200 && !result.isError
+                },
+                keepUnusedDataFor: 5,
+            }),
+        }),
+
         getAllStudent: builder.query({
             query: () => ({
                 url: '/admin/students',
@@ -86,6 +96,7 @@ export const {
     useDeleteResponseMutation,
     useGetTestQuestionsQuery,
     useLazyGetAllStudentQuery,
+    useGetProfileQuery
 } = studentApiSlice
 
 export const selectStudentsResult = studentApiSlice.endpoints.getAllStudent.select()
