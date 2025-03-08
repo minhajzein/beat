@@ -7,6 +7,7 @@ import { FaUserGraduate } from 'react-icons/fa'
 import { LuAlarmClockCheck, LuCalendarDays, LuDownload } from 'react-icons/lu'
 import { RiTimerLine } from 'react-icons/ri'
 import moment from 'moment'
+import generatePDF from '../../../utils/generateResultPdf'
 
 function UserProfile() {
 	const { id } = useParams()
@@ -71,7 +72,10 @@ function UserProfile() {
 								{res.timeTook} Mins
 							</p>
 						</div>
-						<button className='bg-secondary-green justify-center flex gap-1 items-center text-white p-2 rounded-lg'>
+						<button
+							onClick={() => generatePDF(profile, i)}
+							className='bg-secondary-green justify-center flex gap-1 items-center text-white p-2 rounded-lg'
+						>
 							<p>Download Answer Sheet</p>
 							<LuDownload />
 						</button>
