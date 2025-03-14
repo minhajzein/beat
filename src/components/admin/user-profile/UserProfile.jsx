@@ -43,7 +43,7 @@ function UserProfile() {
 					<h1>{profile.student.highestQualification}</h1>
 				</div>
 			</div>
-			<div className='grid grid-cols-2 gap-4'>
+			<div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
 				{profile.result.map((res, i) => (
 					<div
 						key={res._id}

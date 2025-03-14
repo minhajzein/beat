@@ -5,11 +5,11 @@ import { FcFullTrash } from 'react-icons/fc'
 
 function SingleCourse({ course }) {
 	return (
-		<div className='grid grid-cols-3 w-full rounded border border-secondary-green py-2 px-4'>
+		<div className='grid grid-cols-3 w-full rounded border border-secondary-green gap-4 py-2 px-4'>
 			<h1 className='font-semibold text-lg italic'>{course.name}</h1>
 			<div className='flex flex-col gap-2'>
 				<h1 className='text-xs'>Related Streams:</h1>
-				<div className='flex gap-2'>
+				<div className='flex flex-wrap gap-2'>
 					{course.relatedStreams.map(stream => (
 						<Tag key={stream} color='magenta'>
 							{stream}
