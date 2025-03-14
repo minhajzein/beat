@@ -91,7 +91,7 @@ function TestInterface() {
 		}
 	}
 
-	return status === 'submitted' ? (
+	return status === 'submitted' || !studentId ? (
 		<Navigate to='/result' state={{ from: location }} replace />
 	) : (
 		isSuccess && (

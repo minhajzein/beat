@@ -50,7 +50,7 @@ function ShowResult() {
 					<div className='flex flex-wrap gap-2 lg:gap-4'>
 						{result.courses.map(course => (
 							<div
-								key={course.id}
+								key={course._id}
 								className='rounded-lg text-sm bg-white p-4 md:p-2 lg:p-2 capitalize text-black'
 							>
 								{course.name}

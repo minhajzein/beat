@@ -24,6 +24,7 @@ function Register() {
 	const dispatch = useDispatch()
 	const location = useLocation()
 	const status = useSelector(state => state.status.status)
+	const studentId = useSelector(state => state.student.student)
 
 	const formik = useFormik({
 		initialValues: {
@@ -64,9 +65,9 @@ function Register() {
 		},
 	})
 
-	return status === 'registered' ? (
+	return status === 'registered' && studentId ? (
 		<Navigate to='/take-test' state={{ from: location }} replace />
-	) : status === 'submitted' ? (
+	) : status === 'submitted' && studentId ? (
 		<Navigate to='/result' state={{ from: location }} replace />
 	) : (
 		<div className='h-dvh w-full font-merriweather md:px-60 lg:px-80 lg:py-16'>
