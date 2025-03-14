@@ -9,10 +9,10 @@ function Home() {
 			<ImSpinner className='animate-spin' />
 		</div>
 	) : (
-		<div className='grid grid-cols-1 gap-5 p-3 md:grid-cols-2 lg:grid-cols-4'>
+		<div className='grid grid-cols-2 gap-5 p-3 md:grid-cols-2 lg:grid-cols-4'>
 			<div className='bg-purple-light rounded-xl gap-1 text-white pt-16 p-5 flex flex-col justify-end items-center'>
 				<img
-					className='w-1/4 bg-white rounded-full p-2'
+					className='md:w-1/4 w-2/4 bg-white rounded-full p-2'
 					src='/svgs/registered.svg'
 					alt=''
 				/>
@@ -21,8 +21,8 @@ function Home() {
 			</div>
 			<div className='bg-purple-light rounded-xl gap-1 text-white pt-16 p-5 flex flex-col justify-end items-center'>
 				<img
-					className='w-1/4 bg-white rounded-full p-2'
-					src='/svgs/registered.svg'
+					className='md:w-1/4 w-2/4 bg-white rounded-full p-2'
+					src='/svgs/submitted.svg'
 					alt=''
 				/>
 				<h1 className='text-xl font-semibold'>{data.submitted}</h1>
@@ -30,8 +30,8 @@ function Home() {
 			</div>
 			<div className='bg-purple-light rounded-xl gap-1 text-white pt-16 p-5 flex flex-col justify-end items-center'>
 				<img
-					className='w-1/4 bg-white rounded-full p-2'
-					src='/svgs/registered.svg'
+					className='md:w-1/4 w-2/4 bg-white rounded-full p-2'
+					src='/svgs/contacted.svg'
 					alt=''
 				/>
 				<h1 className='text-xl font-semibold'>{data.contacted}</h1>
@@ -39,8 +39,8 @@ function Home() {
 			</div>
 			<div className='bg-purple-light rounded-xl gap-1 text-white pt-16 p-5 flex flex-col justify-end items-center'>
 				<img
-					className='w-1/4 bg-white rounded-full p-2'
-					src='/svgs/registered.svg'
+					className='md:w-1/4 w-2/4 bg-white rounded-full p-2'
+					src='/svgs/skipped.svg'
 					alt=''
 				/>
 				<h1 className='text-xl font-semibold'>{data.testSkipped}</h1>
