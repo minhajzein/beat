@@ -22,7 +22,7 @@ function ShowResult() {
 				<div className='md:relative items-start p-4 w-full h-full md:h-auto flex m-auto flex-col gap-4 md:gap-3 overflow-y-auto lg:p-5 bg-theme-purple text-white md:rounded-lg overflow-hidden shadow-lg shadow-black/50'>
 					<img
 						src='/images/beat_logo.png'
-						className='md:absolute h-16 md:top-5 md:w-20 object-contain md:right-5'
+						className='md:absolute h-16 md:top-5 md:w-24 object-contain md:right-5'
 						alt=''
 					/>
 					<div className='flex flex-col items-start'>
