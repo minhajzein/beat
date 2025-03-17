@@ -70,8 +70,8 @@ function Register() {
 	) : status === 'submitted' && studentId ? (
 		<Navigate to='/result' state={{ from: location }} replace />
 	) : (
-		<div className='h-dvh w-full font-merriweather flex'>
-			<div className='max-w-3xl m-auto h-full md:h-auto lg:grid lg:grid-cols-2 lg:rounded-lg overflow-hidden shadow-lg shadow-black'>
+		<div className='h-dvh w-full md:p-5 font-merriweather flex'>
+			<div className='max-w-3xl md:h-auto m-auto h-full  lg:grid lg:grid-cols-2 lg:rounded-lg overflow-hidden shadow-lg shadow-black'>
 				<img
 					className='object-cover h-1/3 w-full object-top lg:h-full'
 					src='/images/register-image.png'
