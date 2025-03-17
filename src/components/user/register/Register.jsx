@@ -79,7 +79,7 @@ function Register() {
 				/>
 				<div className='bg-theme-purple lg:h-full h-2/3 lg:p-8 p-4 gap-4 text-white flex flex-col w-full relative justify-end'>
 					<img
-						className='w-1/4 md:w-3/4 object-contain pb-2'
+						className='w-2/4 md:w-3/4 object-contain pb-2'
 						src='/images/beat_logo.png'
 						alt='logo'
 					/>
