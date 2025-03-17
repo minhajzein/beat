@@ -71,7 +71,7 @@ function Register() {
 		<Navigate to='/result' state={{ from: location }} replace />
 	) : (
 		<div className='h-dvh w-full font-merriweather flex'>
-			<div className='max-w-2xl m-auto h-full md:h-auto lg:grid lg:grid-cols-2 lg:rounded-lg overflow-hidden shadow-lg shadow-black'>
+			<div className='max-w-3xl m-auto h-full md:h-auto lg:grid lg:grid-cols-2 lg:rounded-lg overflow-hidden shadow-lg shadow-black'>
 				<img
 					className='object-cover h-1/3 w-full object-top lg:h-full'
 					src='/images/register-image.png'
@@ -79,7 +79,7 @@ function Register() {
 				/>
 				<div className='bg-theme-purple lg:h-full h-2/3 lg:p-8 p-4 gap-4 text-white flex flex-col w-full relative justify-end'>
 					<img
-						className='w-3/4 object-contain pb-2'
+						className='w-1/4 md:w-3/4 object-contain pb-2'
 						src='/images/beat_logo.png'
 						alt='logo'
 					/>
