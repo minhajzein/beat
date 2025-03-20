@@ -95,8 +95,8 @@ function TestInterface() {
 		<Navigate to='/result' state={{ from: location }} replace />
 	) : (
 		isSuccess && (
-			<div className='h-dvh flex w-full font-merriweather lg:py-10 lg:px-72'>
-				<div className='md:relative overflow-y-auto items-start w-full h-full md:h-auto flex m-auto flex-col gap-4 p-4 lg:p-5 bg-theme-purple text-white md:rounded-lg overflow-hidden shadow-lg shadow-black/50'>
+			<div className='flex w-full min-h-dvh font-merriweather lg:p-10'>
+				<div className='md:relative overflow-y-auto items-start w-full h-full md:h-auto flex m-auto flex-col gap-4 p-4 lg:p-5 bg-theme-purple text-white md:rounded-lg max-w-3xl overflow-hidden shadow-lg shadow-black/50'>
 					<img
 						src='/images/beat_logo.png'
 						className='md:absolute h-16 md:top-5 md:w-24 object-contain md:right-5'

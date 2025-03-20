@@ -11,6 +11,7 @@ import {
 import { useState } from 'react'
 import { TiThMenu } from 'react-icons/ti'
 import { IoClose } from 'react-icons/io5'
+
 const navItems = [
 	{
 		name: 'Dashboard',
