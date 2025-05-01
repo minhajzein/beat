@@ -19,11 +19,28 @@ const courseSlice = apiSlice.injectEndpoints({
                 body: { ...credentials }
             }),
             invalidatesTags: ['Courses']
+        }),
+        updateCourse: builder.mutation({
+            query: (credentials) => ({
+                url: `/admin/courses/${credentials.id}`,
+                method: 'PUT',
+                body: { ...credentials }
+            }),
+            invalidatesTags: ['Courses']
+        }),
+        deleteCourse: builder.mutation({
+            query: (id) => ({
+                url: `/admin/courses/${id}`,
+                method: 'DELETE'
+            }),
+            invalidatesTags: ['Courses']
         })
     })
 })
 
 export const {
     useGetAllCoursesQuery,
-    useCreateCourseMutation
+    useCreateCourseMutation,
+    useDeleteCourseMutation,
+    useUpdateCourseMutation
 } = courseSlice

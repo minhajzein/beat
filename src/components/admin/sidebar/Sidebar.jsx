@@ -95,9 +95,9 @@ function SideBar() {
 									>
 										<Icon className={`size-5 ${iconColor}`} />
 										{isOpen && (
-											<div className={`${iconColor} hidden md:block`}>
+											<h1 className={`${iconColor} hidden truncate md:block`}>
 												{data.name}
-											</div>
+											</h1>
 										)}
 									</div>
 								</div>

@@ -18,17 +18,17 @@ function Courses() {
 	const { data: streams } = useGetAllStreamsQuery()
 	const [createCourse, { isLoading, isError }] = useCreateCourseMutation()
 
-	const [newCourse, setNewCourse] = useState('')
+	const [newcourse, setNewCourse] = useState('')
 	const [relatedStreams, setRelatedStreams] = useState([])
 
 	const handleSubmit = async e => {
 		e.preventDefault()
 		try {
-			if (newCourse === '') return toast.error('Please Enter a Question Type')
+			if (newcourse === '') return toast.error('Please Enter Course Name')
 			if (relatedStreams.length <= 0)
 				return toast.error('Please Select Related Streams')
 			const { data } = await createCourse({
-				name: newCourse,
+				name: newcourse,
 				relatedStreams: relatedStreams,
 			})
 			if (data?.success) {
@@ -49,8 +49,8 @@ function Courses() {
 				<input
 					className='p-2 text-sm border border-secondary-green w-[50%] rounded outline-none'
 					placeholder='Add New Course...'
-					newCourse='text'
-					value={newCourse}
+					newcourse='text'
+					value={newcourse}
 					onChange={e => setNewCourse(e.target.value)}
 				/>
 
@@ -74,7 +74,7 @@ function Courses() {
 					))}
 				</Select>
 				<button
-					newCourse='submit'
+					newcourse='submit'
 					disabled={isLoading}
 					className='px-4 py-1 bg-secondary-green rounded text-white'
 				>

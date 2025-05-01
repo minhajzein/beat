@@ -1,7 +1,8 @@
 import { FaRegQuestionCircle } from 'react-icons/fa'
 import { Tag } from 'antd'
 import { AiOutlineEdit } from 'react-icons/ai'
-import { FcFullTrash } from 'react-icons/fc'
+import DeleteQuestion from './DeleteQuestion'
+import { Link } from 'react-router-dom'
 
 function SingleQuestion({ question }) {
 	return (
@@ -23,14 +24,14 @@ function SingleQuestion({ question }) {
 				))}
 			</div>
 			<div className='flex gap-4'>
-				<button className='p-2 rounded-lg flex items-center gap-2 bg-secondary-green text-white'>
+				<Link
+					to={`/admin/questions/${question._id}`}
+					className='p-2 rounded-lg flex items-center gap-2 bg-secondary-green text-white'
+				>
 					<h1>Edit</h1>
 					<AiOutlineEdit />
-				</button>
-				<button className='p-2 text-white flex items-center gap-2 rounded-lg bg-theme-red'>
-					<h1>Delete</h1>
-					<FcFullTrash />
-				</button>
+				</Link>
+				<DeleteQuestion questionId={question._id} />
 			</div>
 		</div>
 	)

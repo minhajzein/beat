@@ -17,27 +17,24 @@ const navItems = [
 		name: 'Dashboard',
 		icon: FcHome,
 		path: '/admin/',
-		color: 'bg-gray-500',
 	},
 	{
 		name: 'Responses',
 		icon: FcConferenceCall,
 		path: '/admin/responses',
-		color: 'bg-red-500',
 	},
 	{
 		name: 'Questions',
 		icon: FcQuestions,
 		path: '/admin/questions',
-		color: 'bg-red-500',
 	},
 	{
 		name: 'Manage Data',
 		icon: FcDataConfiguration,
 		path: '/admin/manage-data',
-		color: 'bg-red-500',
 	},
 ]
+
 function Navbar() {
 	const { pathname } = useLocation()
 	const navigate = useNavigate()
@@ -62,6 +59,7 @@ function Navbar() {
 			console.error(error)
 		}
 	}
+
 	return (
 		<div className='bg-secondary-white w-full relative shadow-lg shadow-black/50 flex items-center justify-between  p-5'>
 			{pathname === '/admin' || pathname === '/admin/' ? (
@@ -104,7 +102,7 @@ function Navbar() {
 			) : (
 				<div className='flex items-center'>
 					<h1 className='capitalize text-xl'>
-						{pathname.slice(7).replace('-', ' ')}
+						{pathname.slice(7).replace('-', ' ').split('/')[0]}
 					</h1>
 				</div>
 			)}

@@ -18,7 +18,7 @@ function DataManage() {
 							section === btn
 								? 'bg-theme-purple text-white p-2 rounded'
 								: 'border border-theme-purple text-theme-purple p-2 rounded'
-						} capitalize text-xs md:text-sm`}
+						} capitalize text-xs md:text-sm truncate`}
 					>
 						{btn}
 					</button>

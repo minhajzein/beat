@@ -1,24 +1,38 @@
-import { Input, Select } from 'antd'
+import { ImSpinner } from 'react-icons/im'
+import { v4 as idGenerator } from 'uuid'
+import {
+	useGetQuestionByidQuery,
+	useUpdateQuestionMutation,
+} from '../../../redux/apiSlices/questonsSlice'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useGetAllQuestionTypesQuery } from '../../../redux/apiSlices/questionTypeSlice'
 import { useGetAllStreamsQuery } from '../../../redux/apiSlices/streamSlice'
-import { useState } from 'react'
-import TextArea from 'antd/es/input/TextArea'
-import { v4 as idGenerator } from 'uuid'
-import { toast } from 'react-toastify'
-import { useCreateQuestionMutation } from '../../../redux/apiSlices/questonsSlice'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import { Loading3QuartersOutlined } from '@ant-design/icons'
+import { Input, Select } from 'antd'
+import TextArea from 'antd/es/input/TextArea'
+import { toast } from 'react-toastify'
 
-function QuestionForm() {
-	const { data: questionTypes } = useGetAllQuestionTypesQuery()
-	const { data: streams } = useGetAllStreamsQuery()
-	const [createQuestion, { isLoading }] = useCreateQuestionMutation()
+function EditQuestion() {
+	const { id } = useParams()
+	const {
+		data,
+		isLoading: fetchingQuestion,
+		isSuccess,
+	} = useGetQuestionByidQuery(id)
 
-	const [questionType, setQuestionType] = useState('')
+	const { data: questionTypes, isLoading: fetchingTypes } =
+		useGetAllQuestionTypesQuery()
+
+	const { data: streams, isLoading: fetchingStreams } = useGetAllStreamsQuery()
+
+	const [editQuestion, { isLoading }] = useUpdateQuestionMutation()
+
+	const [questionType, setQuestionType] = useState(data?.questionType || '')
 	const [answer, setAnswer] = useState('')
-	const [question, setQuestion] = useState('')
+	const [question, setQuestion] = useState(data?.question || '')
 	const [selectedStream, setSelectedStream] = useState('Select a Stream')
-	const [answers, setAnswers] = useState([])
+	const [answers, setAnswers] = useState(data?.answers || [])
 	const navigate = useNavigate()
 
 	const addAnswer = () => {
@@ -38,10 +52,12 @@ function QuestionForm() {
 
 	const handleSubmit = async e => {
 		e.preventDefault()
-		if (questionType === '' || question === '')
+
+		if (questionType === '' || question === '' || answers.length < 3)
 			return toast.error('All fields are required')
 		try {
-			const { data } = await createQuestion({
+			const { data } = await editQuestion({
+				id: id,
 				questionType: questionType,
 				question: question,
 				answers: answers,
@@ -60,9 +76,21 @@ function QuestionForm() {
 		}
 	}
 
-	return (
+	useEffect(() => {
+		if (isSuccess) {
+			setQuestionType(data.questionType)
+			setAnswers(data?.answers)
+			setQuestion(data?.question)
+		}
+	}, [isSuccess])
+
+	return fetchingQuestion || fetchingStreams || fetchingTypes ? (
+		<div className='w-full flex justify-center items-center p-4'>
+			<ImSpinner className='animate-spin' />
+		</div>
+	) : (
 		<div className='w-full flex flex-col gap-4'>
-			<h1>Add New Question</h1>
+			<h1>Edit Question</h1>
 			<form onSubmit={handleSubmit} className='w-full flex flex-col gap-5'>
 				<div className='w-full flex flex-col'>
 					<label htmlFor='questionType' className='text-sm text-gray-500'>
@@ -73,6 +101,7 @@ function QuestionForm() {
 						id='questionType'
 						size='large'
 						onChange={value => setQuestionType(value)}
+						value={questionType}
 						showSearch
 						optionFilterProp='children'
 						filterOption={(input, option) =>
@@ -195,4 +224,4 @@ function QuestionForm() {
 	)
 }
 
-export default QuestionForm
+export default EditQuestion

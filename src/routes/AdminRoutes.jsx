@@ -9,6 +9,7 @@ import DataManage from '../components/admin/manage-data/DataManage'
 import Questions from '../components/admin/questions/Questions'
 import QuestionForm from '../components/admin/questions/QuestionForm'
 import UserProfile from '../components/admin/user-profile/UserProfile'
+import EditQuestion from '../components/admin/questions/EditQuestion'
 
 function AdminRoutes() {
 	return (
@@ -24,6 +25,7 @@ function AdminRoutes() {
 						<Route path='profile/:id' element={<UserProfile />} />
 						<Route path='manage-data' element={<DataManage />} />
 						<Route path='questions' element={<Questions />} />
+						<Route path='questions/:id' element={<EditQuestion />} />
 						<Route path='add-question' element={<QuestionForm />} />
 					</Route>
 				</Route>
