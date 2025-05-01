@@ -24,6 +24,7 @@ function DeleteCourse({ courseId }) {
 			onConfirm={handleDelete}
 			okText='Yes'
 			cancelText='No'
+			placement='left'
 		>
 			<button className='p-4 rounded bg-theme-red text-white'>
 				<FcFullTrash />
