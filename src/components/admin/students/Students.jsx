@@ -9,9 +9,14 @@ import {
 import { Link } from 'react-router-dom'
 import { ImSpinner } from 'react-icons/im'
 import { toast } from 'react-toastify'
+import { PiExportBold } from 'react-icons/pi'
+import { exportToPDF } from './exportData'
 
 function Students() {
 	const { data: students, isLoading, isError } = useGetAllStudentQuery()
+
+	const handleExport = () => exportToPDF(students, 'students_data')
+
 	const [searchText, setSearchText] = useState('')
 	const [searchedColumn, setSearchedColumn] = useState('')
 	const searchInput = useRef(null)
@@ -226,12 +231,26 @@ function Students() {
 			<ImSpinner className='animate-spin' />
 		</div>
 	) : (
-		<Table
-			className='w-full'
-			columns={columns}
-			pagination={{ pageSize: 7 }}
-			dataSource={isLoading ? [] : students}
-		/>
+		<div className='flex flex-col'>
+			<div className='flex justify-between p-4'>
+				<h1 className='text-xl font-bold capitalize'>
+					Responses from students
+				</h1>
+				<button
+					onClick={handleExport}
+					className='px-3 py-1 capitalize flex justify-center items-center gap-2 rounded border duration-300 hover:bg-purple-500 hover:text-white border-purple-500 text-purple-500'
+				>
+					<PiExportBold />
+					export data
+				</button>
+			</div>
+			<Table
+				className='w-full'
+				columns={columns}
+				pagination={{ pageSize: 7 }}
+				dataSource={isLoading ? [] : students}
+			/>
+		</div>
 	)
 }
 
