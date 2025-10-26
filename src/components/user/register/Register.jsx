@@ -1,6 +1,5 @@
 import {
 	Loading3QuartersOutlined,
-	PhoneOutlined,
 	RocketOutlined,
 	TrophyOutlined,
 	UserOutlined,
@@ -14,17 +13,65 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeStatus } from '../../../redux/slices/statusSlice'
 import { storeStudentId } from '../../../redux/slices/studentSlice'
-import { keralaDistricts } from '../../../config/districts'
+import { useEffect, useState } from 'react'
+import { PhoneNumberUtil } from 'google-libphonenumber'
+import axios from 'axios'
+import countries from '../../../constants/countries.json'
 
 //================================================================================================
+const phoneUtil = PhoneNumberUtil.getInstance()
 
 function Register() {
+	const [country, setCountry] = useState('India')
+	const [dailCode, setDailCode] = useState('+91')
+	const [iso, setIso] = useState('IN')
+
+	const [locations, setLocations] = useState([])
+	const [searchPlace, setSearchPlace] = useState('')
+
 	const [register, { isLoading, isError, error }] = useRegisterMutation()
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const location = useLocation()
 	const status = useSelector(state => state.status.status)
 	const studentId = useSelector(state => state.student.student)
+
+	useEffect(() => {
+		formik.setFieldValue('district', '')
+		;(async () => {
+			try {
+				const { data } = await axios.post(
+					'https://countriesnow.space/api/v0.1/countries/cities',
+					{ country: country }
+				)
+				setLocations(data?.data)
+			} catch (error) {
+				console.log(error)
+			}
+		})()
+	}, [country, searchPlace])
+
+	const SelectBefore = (
+		<Select
+			placeholder='Select a Country'
+			defaultValue={'+91 (India) +IN'}
+			className='w-32'
+			onChange={(value, option) => {
+				setCountry(value)
+				setDailCode(option.label.split(' ')[0])
+				setIso(option.label.split(' ')[1])
+			}}
+			showSearch
+			optionFilterProp='label'
+			filterOption={(input, option) =>
+				option.label.toLowerCase().includes(input.toLowerCase())
+			}
+			options={countries.map(country => ({
+				value: country.name,
+				label: `${country.code} ${country.iso} (${country.name})`,
+			}))}
+		/>
+	)
 
 	const formik = useFormik({
 		initialValues: {
@@ -37,20 +84,30 @@ function Register() {
 			fullName: Yup.string('First Name should be letters')
 				.min(3)
 				.required('Full Name is Required'),
-			district: Yup.string().required('Please select a District'),
+			district: Yup.string().required('Please select a Location'),
 			phone: Yup.string()
 				.required('mobile number is required')
-				.matches(
-					/^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[6-9]\d{9}$/,
-					'mobile number is not valid'
-				),
+				.test('is-valid-phone', 'Mobile number is not valid', function (value) {
+					if (!value || !iso) return false
+					try {
+						const number = phoneUtil.parse(value, iso)
+						return phoneUtil.isValidNumber(number)
+					} catch (e) {
+						return false
+					}
+				}),
 			highestQualification: Yup.string().required(
 				'Please enter your highest qualification'
 			),
 		}),
 		onSubmit: async user => {
 			try {
-				const { data } = await register({ ...user, status: 'registered' })
+				const { data } = await register({
+					...user,
+					status: 'registered',
+					phone: dailCode + user.phone,
+				})
+
 				if (data?.success) {
 					toast.success('Registered successfully!')
 					dispatch(changeStatus('registered'))
@@ -110,9 +167,8 @@ function Register() {
 								Phone Number
 							</label>
 							<Input
-								addonBefore={<PhoneOutlined />}
+								addonBefore={SelectBefore}
 								placeholder='9876543210'
-								prefix='+91'
 								name='phone'
 								onChange={formik.handleChange}
 								value={formik.values.phone}
@@ -148,27 +204,25 @@ function Register() {
 							</div>
 							<div className='flex flex-col'>
 								<label className='text-xs' htmlFor='district'>
-									District
+									Location
 								</label>
 								<Select
-									placeholder='Select a District'
+									placeholder='Select a Location'
 									className='w-full rounded shadow shadow-black/50 text-black'
 									onChange={value => formik.setFieldValue('district', value)}
 									showSearch
+									onSearch={value => setSearchPlace(value)}
 									size='large'
 									optionFilterProp='children'
 									filterOption={(input, option) =>
-										option.props.children
-											.toLowerCase()
-											.indexOf(input.toLowerCase()) >= 0
+										option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0
 									}
-								>
-									{keralaDistricts?.map(district => (
-										<Select.Option value={district} key={district}>
-											{district}
-										</Select.Option>
-									))}
-								</Select>
+									options={locations.map(loc => ({
+										value: loc,
+										label: loc,
+									}))}
+								/>
+
 								{formik.touched.district && formik.errors.district && (
 									<p className='text-xs text-red-500'>
 										{formik.errors.district}

@@ -13,7 +13,7 @@ import { PiExportBold } from 'react-icons/pi'
 import { exportToPDF } from './exportData'
 
 function Students() {
-	const { data: students, isLoading, isError } = useGetAllStudentQuery()
+	const { data: students, isLoading } = useGetAllStudentQuery()
 
 	const handleExport = () => exportToPDF(students, 'students_data')
 
