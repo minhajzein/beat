@@ -61,6 +61,7 @@ function Register() {
 				setDailCode(option.label.split(' ')[0])
 				setIso(option.label.split(' ')[1])
 			}}
+			placement='topLeft'
 			showSearch
 			optionFilterProp='label'
 			filterOption={(input, option) =>
@@ -211,6 +212,7 @@ function Register() {
 									className='w-full rounded shadow shadow-black/50 text-black'
 									onChange={value => formik.setFieldValue('district', value)}
 									showSearch
+									placement='topLeft'
 									onSearch={value => setSearchPlace(value)}
 									size='large'
 									optionFilterProp='children'
