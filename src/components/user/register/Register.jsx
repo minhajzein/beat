@@ -13,7 +13,7 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeStatus } from '../../../redux/slices/statusSlice'
 import { storeStudentId } from '../../../redux/slices/studentSlice'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { PhoneNumberUtil } from 'google-libphonenumber'
 import axios from 'axios'
 import countries from '../../../constants/countries.json'
@@ -28,6 +28,11 @@ function Register() {
 
 	const [locations, setLocations] = useState([])
 	const [searchPlace, setSearchPlace] = useState('')
+
+	const countriesWithFlags = countries.map(country => ({
+		...country,
+		flag: `https://flagcdn.com/${country.iso.toLowerCase()}.svg`,
+	}))
 
 	const [register, { isLoading, isError, error }] = useRegisterMutation()
 	const navigate = useNavigate()
@@ -51,26 +56,52 @@ function Register() {
 		})()
 	}, [country, searchPlace])
 
+	const options = useMemo(
+		() =>
+			countriesWithFlags.map(c => ({
+				label: (
+					<div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+						<img
+							src={c.flag}
+							width='20'
+							height='15'
+							style={{ borderRadius: '3px', objectFit: 'cover' }}
+						/>
+						{c.name} ({c.code})
+					</div>
+				),
+				value: c.name,
+				searchLabel: `${c.name} ${c.code} ${c.iso}`,
+			})),
+		[countriesWithFlags]
+	)
+
 	const SelectBefore = (
 		<Select
 			placeholder='Select a Country'
-			defaultValue={'+91 (India) +IN'}
-			className='w-32'
+			virtual={false}
+			value={country}
+			className='min-w-32'
 			onChange={(value, option) => {
 				setCountry(value)
-				setDailCode(option.label.split(' ')[0])
-				setIso(option.label.split(' ')[1])
+				setDailCode(option.searchLabel.split(' ')[1])
+				setIso(option.searchLabel.split(' ')[2])
 			}}
 			placement='topLeft'
 			showSearch
 			optionFilterProp='label'
 			filterOption={(input, option) =>
-				option.label.toLowerCase().includes(input.toLowerCase())
+				(typeof option?.label === 'string'
+					? option.label.toLowerCase()
+					: option?.value?.toLowerCase()
+				).includes(input.toLowerCase())
 			}
-			options={countries.map(country => ({
-				value: country.name,
-				label: `${country.code} ${country.iso} (${country.name})`,
-			}))}
+			dropdownStyle={{
+				width: '25%',
+				minWidth: '200px',
+			}}
+			popupMatchSelectWidth={true}
+			options={options}
 		/>
 	)
 
