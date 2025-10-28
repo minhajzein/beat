@@ -97,10 +97,8 @@ function Register() {
 				).includes(input.toLowerCase())
 			}
 			dropdownStyle={{
-				width: '25%',
-				minWidth: '200px',
+				minWidth: '300px',
 			}}
-			popupMatchSelectWidth={true}
 			options={options}
 		/>
 	)
